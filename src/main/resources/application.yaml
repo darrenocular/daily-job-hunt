@@ -1,3 +1,12 @@
 spring:
   application:
     name: daily-job-hunt
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DATASOURCE_NAME:postgres}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:password}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
