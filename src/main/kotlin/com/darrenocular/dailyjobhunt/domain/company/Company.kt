@@ -1,13 +1,13 @@
 package com.darrenocular.dailyjobhunt.domain.company
 
-import kotlin.time.Clock
-import kotlin.time.Instant
+import java.time.Instant
+import java.time.InstantSource
 
 data class Company(
     val id: CompanyId,
     val name: String,
     val atsBoard: AtsBoard,
-    val createdAt: Instant = Clock.System.now(),
+    val createdAt: Instant = InstantSource.system().instant(),
     val updatedAt: Instant = createdAt,
 ) {
     init {
@@ -31,14 +31,14 @@ data class Company(
         require(trimmed.isNotBlank()) { "Company name must not be blank" }
         if (this.name == trimmed) return this
 
-        return copy(name = trimmed, updatedAt = Clock.System.now())
+        return copy(name = trimmed, updatedAt = InstantSource.system().instant())
     }
 
 
     fun updateAtsBoard(newAtsBoard: AtsBoard): Company {
         if (this.atsBoard == newAtsBoard) return this
 
-        return copy(atsBoard = newAtsBoard, updatedAt = Clock.System.now())
+        return copy(atsBoard = newAtsBoard, updatedAt = InstantSource.system().instant())
     }
 
     override fun equals(other: Any?): Boolean {
